@@ -1,22 +1,13 @@
-"""
-1. Import and initialize FastAPI
-2. Include router or endpoints
-3. Configure middleware if needed
-4. Start the app with uvicorn or similar
-"""
+#___________________DONE BY: [FILL IN NAME]
 
-from fastapi import FastAPI
-# from .routes import user_routes  # Example router
+# Import necessary FastAPI modules
 
-app = FastAPI()
+# Import database engine and Base class
 
-# 1. Attach routers or endpoints
-# app.include_router(user_routes, prefix="/users", tags=["Users"])
+# Import routers from routes directory
 
-@app.get("/")
-def root():
-    """
-    Basic root endpoint to confirm server runs.
-    Returns a hello message.
-    """
-    return {"message": "Welcome to StudySync!"}
+# Create FastAPI app instance
+
+# Create all tables (Base.metadata.create_all)
+
+# Include user routes with app.include_router(...)

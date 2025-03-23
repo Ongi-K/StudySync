@@ -1,33 +1,14 @@
-"""
-1. Import necessary libraries (SQLAlchemy, etc.)
-2. Read DB connection info (URL, credentials)
-3. Create an engine for Postgres
-4. Initialize a session factory
-5. Provide a helper to get DB session
-"""
+#___________________DONE BY: [FILL IN NAME]
 
-# Example placeholder imports
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+# Import SQLAlchemy modules
 
-# 1. DB connection string, e.g. from environment variables
-DATABASE_URL = "postgresql://user:password@localhost/studysync_db"
+# Define your database URL (replace with actual credentials)
 
-# 2. Create engine
-engine = create_engine(DATABASE_URL)
+# Create SQLAlchemy engine and sessionmaker
 
-# 3. Configure session
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Define Base using declarative_base()
 
-def get_db():
-    """
-    Yields a database session.
-    Make sure to close it after use.
-    """
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# Create a function get_db() that opens and closes a database session using yield
+
 
 # Just adding a new function
