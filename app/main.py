@@ -26,3 +26,8 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(database.get_db)
 @app.get("/matches/")
 def get_matches(location: str, db: Session = Depends(database.get_db)):
     return crud.get_matches_by_location(db=db, location=location)
+
+@app.get("/")
+def read_root():
+    return {"message": "StudySync API is live 🎉"}
+
