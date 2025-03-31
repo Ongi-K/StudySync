@@ -5,23 +5,57 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Find Your Study Match</h1>
+  <h1>StudySync — Find Your Study Group</h1>
+
+  <form id="register-form">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="location" placeholder="City / Province" required>
+    <input type="text" name="status" placeholder="Full-time / Part-time" required>
+    <input type="text" name="tech_stack" placeholder="Tech Stack (e.g. Python)" required>
+    <input type="text" name="year" placeholder="Year of Study" required>
+    <input type="url" name="social_link" placeholder="Social Media or WhatsApp Link" required>
+    <button type="submit">Register</button>
+  </form>
+
+  <hr>
+
   <form id="match-form">
-    <input type="text" name="location" placeholder="City or Province">
+    <input type="text" id="match-location" placeholder="Search by location">
     <button type="submit">Find Matches</button>
   </form>
+
   <ul id="results"></ul>
+
   <script>
-    document.getElementById('match-form').onsubmit = async (e) => {
+    const apiBase = "https://studysync-7my9.onrender.com";
+
+    // Register user
+    document.getElementById("register-form").onsubmit = async (e) => {
       e.preventDefault();
-      const loc = e.target.location.value;
-      const res = await fetch(`/matches?location=${loc}`);
-      const data = await res.json();
-      const results = document.getElementById('results');
+      const form = e.target;
+      const data = Object.fromEntries(new FormData(form));
+      const res = await fetch(`${apiBase}/users/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      const json = await res.json();
+      alert("Registered: " + JSON.stringify(json));
+      form.reset();
+    };
+
+    // Match search
+    document.getElementById("match-form").onsubmit = async (e) => {
+      e.preventDefault();
+      const location = document.getElementById("match-location").value;
+      const res = await fetch(`${apiBase}/matches?location=${location}`);
+      const users = await res.json();
+      const results = document.getElementById("results");
       results.innerHTML = "";
-      data.forEach(user => {
+      users.forEach(user => {
         const li = document.createElement("li");
-        li.textContent = `${user.name} (${user.tech_stack}) - ${user.social_link}`;
+        li.innerHTML = `<strong>${user.name}</strong> — ${user.tech_stack} — <a href="${user.social_link}" target="_blank">Contact</a>`;
         results.appendChild(li);
       });
     };
