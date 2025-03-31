@@ -16,3 +16,19 @@
 
 # Add Config class with orm_mode = True
 
+from pydantic import BaseModel
+
+class UserCreate(BaseModel):
+    name: str
+    email: str
+    location: str
+    status: str
+    tech_stack: str
+    year: str
+    social_link: str
+
+class UserOut(UserCreate):
+    id: int
+
+    class Config:
+        orm_mode = True

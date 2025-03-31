@@ -1,8 +1,8 @@
 #___________________DONE BY: [FILL IN NAME]
 
-# Add the following dependencies (each on a new line):
-# fastapi
-# uvicorn
-# sqlalchemy
-# psycopg2-binary
-# pydantic
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+pydantic
+python-dotenv

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>StudySync</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Find Your Study Match</h1>
+  <form id="match-form">
+    <input type="text" name="location" placeholder="City or Province">
+    <button type="submit">Find Matches</button>
+  </form>
+  <ul id="results"></ul>
+  <script>
+    document.getElementById('match-form').onsubmit = async (e) => {
+      e.preventDefault();
+      const loc = e.target.location.value;
+      const res = await fetch(`/matches?location=${loc}`);
+      const data = await res.json();
+      const results = document.getElementById('results');
+      results.innerHTML = "";
+      data.forEach(user => {
+        const li = document.createElement("li");
+        li.textContent = `${user.name} (${user.tech_stack}) - ${user.social_link}`;
+        results.appendChild(li);
+      });
+    };
+  </script>
+</body>
+</html>
